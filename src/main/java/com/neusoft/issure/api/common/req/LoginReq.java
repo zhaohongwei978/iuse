@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class LoginReq {
-    private String mobile;
+    private String mobile;//用户列表
 }

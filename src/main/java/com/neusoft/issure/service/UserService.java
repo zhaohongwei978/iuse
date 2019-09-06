@@ -1,14 +1,16 @@
 package com.neusoft.issure.service;
 
 import com.neusoft.issure.api.common.req.LoginReq;
+import com.neusoft.issure.api.common.req.UserListParam;
 import com.neusoft.issure.common.Responsive.Responsive;
 import com.neusoft.issure.domain.User;
 import com.neusoft.issure.repository.UserDao;
 import com.neusoft.issure.util.JwtUtils;
 import com.neusoft.issure.util.lang.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import sun.rmi.runtime.Log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,5 +38,18 @@ public class UserService {
             return Responsive.success(resultMap);
         }
         return Responsive.success();
+    }
+    /**
+     * 获取用户列表
+     */
+    public Responsive GetUserList(UserListParam req){
+        try {
+            PageRequest pageRequest = PageRequest.of(req.getCurrentPage()-1,req.getPageSize());
+            Page<User> user = userDao.findAll(pageRequest);
+            return Responsive.success(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Responsive.of("","系统异常","");
+        }
     }
 }

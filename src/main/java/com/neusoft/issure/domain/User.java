@@ -125,7 +125,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserController{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
